@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Timezones Buddy</title>
+    <meta name="description" content="Timezones Buddy">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <link rel="stylesheet" href="app.css" type="text/css" />
+
+    <div id="app">
+      <section class="searchbox">
+        <form>
+          <input class="query"
+            type="text"
+            placeholder="Convert Timestamp"
+            autocomplete="off" />
+            <button class="submit"></button>
+        </form>
+        <ul class="examples">
+          <li> Select an example: </li>
+          <li class="clickable">
+            <span class="datetime">2017-02-28 3:13pm</span>
+            <span class="from-tz">utc</span>
+            <span class="sep">to</span>
+            <span class="to-tz">here</span>
+          </li>
+          <li class="clickable">
+            <span class="datetime">28 feb 13:13:10</span>
+            <span class="sep">in</span>
+            <span class="to-tz">london</span>
+          </li>
+          <li class="clickable">
+            <span class="datetime">10 Mar 2019</span>
+            <span class="sep">to</span>
+            <span class="to-tz">utc</span>
+          </li>
+          <li class="clickable">
+            <span class="datetime">6pm</span>
+            <span class="from-tz">china</span>
+            <span class="sep">to</span>
+            <span class="to-tz">PST</span>
+          </li>
+          <li class="clickable">
+            <span class="datetime">15:43</span>
+            <span class="from-tz">california</span>
+            <span class="sep">to</span>
+            <span class="to-tz">+10</span>
+          </li>
+          <li class="clickable">
+            <span class="datetime">time</span>
+            <span class="from-tz">-6</span>
+            <span class="sep">to</span>
+            <span class="to-tz">india</span>
+          </li>
+          <li class="clickable">
+            <span class="datetime">now</span>
+            <span class="sep">to</span>
+            <span class="to-tz">-3</span>
+          </li>
+          <li class="clickable">
+            <span class="datetime">1497770000</span>
+            <span class="sep">in</span>
+            <span class="to-tz">Tokyo</span>
+          </li>
+          <li>
+            <span class="datetime">DateTime</span>
+            <span class="from-tz">Timezone/Place</span>
+            <span class="sep">to/in</span>
+            <span class="to-tz">Timezone/Place/PoP</span>
+          </li>
+        </ul>
+        <div class="examples-pulldown"> Hide Examples </div>
+      </section>
+
+      <section class="resultbox">
+        <div class="from">
+          <div class="input-query"> </div>
+          <div class="input-result1"> </div>
+          <div class="input-result2"> </div>
+          <div class="input-unix"> </div>
+        </div>
+        <div class="sep"></div>
+        <div class="to">
+          <div class="output-query"> </div>
+          <div class="output-result1"> </div>
+          <div class="output-result2"> </div>
+          <div class="output-unix"> </div>
+        </div>
+      </section>
+
+      <section class="worldclocks"></section>
+    </div>
+
+    <script src="moment.min.js"> </script>
+    <script src="moment-timezone.min.js"> </script>
+    <script src="timezone.js"> </script>
+    <script src="TimeParser.js"> </script>
+    <script src="app.js"> </script>
+
+  </body>
+</html>
