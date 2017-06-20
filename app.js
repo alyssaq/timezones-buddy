@@ -1,4 +1,4 @@
-(function ({ moment, localStorage }, TimeParser) {
+(function ({ moment }, TimeParser) {
   function parseAndDisplay (query) {
     const separators = [' to ', ' in ']
     const sep = separators.find((sep) => query.includes(sep))
@@ -61,19 +61,10 @@
     const hideText = 'Show Examples'
     const showText = 'Hide Examples'
 
-    if (forceHide === true) {
-      elem.style.transform = hideScale
-      elem.style.position = hidePos
-      elem.style.opacity = hideOpacity
-      pulldownElem.textContent = hideText
-    } else {
-      localStorage.setItem('timeconvertExample', pulldownElem.textContent.split(' ')[0])
-
-      elem.style.transform = elem.style.transform === hideScale ? showScale : hideScale
-      elem.style.position = elem.style.position === hidePos ? showPos : hidePos
-      elem.style.opacity = elem.style.opacity === hideOpacity ? showOpacity : hideOpacity
-      pulldownElem.textContent = pulldownElem.textContent === hideText ? showText : hideText
-    }
+    elem.style.transform = elem.style.transform === hideScale ? showScale : hideScale
+    elem.style.position = elem.style.position === hidePos ? showPos : hidePos
+    elem.style.opacity = elem.style.opacity === hideOpacity ? showOpacity : hideOpacity
+    pulldownElem.textContent = pulldownElem.textContent === hideText ? showText : hideText
   }
 
   function onClickExampleRow (e) {
@@ -100,9 +91,6 @@
     }).join('')
   }
 
-  if (localStorage.getItem('timeconvertExample') !== 'Show') {
-    toggleExamples(true)
-  }
   document.querySelector('button.submit').addEventListener('click', onClickSearch)
   document.querySelector('.examples-pulldown').addEventListener('click', toggleExamples)
   Array.from(document.querySelectorAll('.clickable')).forEach((e) => {
