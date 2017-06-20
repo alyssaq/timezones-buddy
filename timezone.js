@@ -379,6 +379,7 @@ TimeConvert.timezoneData = {
     "America/New_York|Newark",
     "America/Los_Angeles|California",
     "America/Los_Angeles|Cupertino",
+    "America/Los_Angeles|San Francisco",
     "America/Los_Angeles|San Jose",
     "America/Los_Angeles|Seattle",
     "America/Los_Angeles|Sunnyvale",

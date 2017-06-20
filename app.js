@@ -110,7 +110,7 @@
   })
 
   // Places to display in the bottom world clock section
-  const places = ['New York', 'UTC', 'London', 'India', 'Singapore']
+  const places = ['San Francisco', 'UTC', 'London', 'India', 'Singapore']
   renderWorldClocks(places)
 
 })(window, TimeParser)
