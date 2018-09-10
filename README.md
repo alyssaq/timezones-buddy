@@ -1,6 +1,11 @@
 # Timezones Converter
 
-Convert any human-friendly or ISO 8601 timestamp with a timezone to another timezone and unix timestamp
+Convert any human-friendly timestamp with timezone to another timezone 
+
+Formats:
+* Date and time 
+* Unix timestamp 
+* 3-letter IANA airport code
 
 <https://time.commons.host>
 
