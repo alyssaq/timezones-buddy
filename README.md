@@ -2,7 +2,7 @@
 
 Convert any human-friendly or ISO 8601 timestamp with a timezone to another timezone and unix timestamp
 
-<https://alyssaq.github.io/timezones-buddy>
+<https://time.commons.host>
 
 ## Development
 Run a local server:
