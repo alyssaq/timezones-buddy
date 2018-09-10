@@ -82,7 +82,14 @@ class TimeParser {
     return tzMajor * 60 + magnitude * (numberParts[1] || 0)
   }
 
-  findValidTimezoneName (tz) {
+  findValidTimezoneName (tz = '') {
+    if (tz.length === 3 && window.TimeConvert && window.TimeConvert.airport_timezones) {
+      const airportTz = window.TimeConvert.airport_timezones[tz.toUpperCase()]
+      if (airportTz) {
+        return airportTz
+      }
+    }
+
     return moment.tz.names().find((name) => {
       return name.split('/').pop().replace('_', ' ').toLowerCase() === tz.toLowerCase()
     })

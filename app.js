@@ -113,6 +113,11 @@
     e.addEventListener('click', onClickExampleRow, false)
   })
 
+  function fetchAirportTimezones () {
+    fetch('airport_timezones.json').then(r => r.json()).then(data => window.TimeConvert.airport_timezones = data)
+  }
+
+  fetchAirportTimezones()
   renderWorldClocks()
   window.setInterval(renderWorldClocks, 60000) // Update every minute
 })(window, TimeParser)
