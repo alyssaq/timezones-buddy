@@ -25,3 +25,4 @@ commonshost deploy
 
 ## Datasets
 * Airports to timezones: https://openflights.org/data.html
+* Metropolitan area codes: https://wikitravel.org/en/Metropolitan_Area_Airport_Codes
