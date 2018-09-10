@@ -50,6 +50,7 @@ input:focus {
 
 /* Search input */
 form > input {
+  -webkit-appearance: textfield;
   height: 55px;
   padding: 0 10px;
   border-radius: 3px;
@@ -87,7 +88,6 @@ form > input {
 
 ul.examples {
   list-style: none;
-  width: 100%;
   padding: 0px 10px;
   border: 1px solid lightgrey;
   margin: 0px;
@@ -189,11 +189,18 @@ ul.examples {
   .resultbox {
     font-size: 1em;
   }
+  .searchbox {
+    width: 80%;
+  }
 }
 
 @media (max-width: 500px) {
   .resultbox {
     flex-direction: column;
     align-items: center;
+  }
+  .searchbox {
+    width: 100%;
+    padding-top: 0px;
   }
 }
