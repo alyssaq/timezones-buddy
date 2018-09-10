@@ -1,6 +1,6 @@
 class TimeParser {
   constructor (timeInput = '') {
-    this.timeInput = timeInput.trim()
+    this.timeInput = timeInput.trim().toLowerCase()
   }
 
   isNow () {
