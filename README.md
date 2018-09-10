@@ -15,3 +15,5 @@ Open browser to <http://localhost:2000>
 Start server and open browser to <http://localhost:2000/tests>   
 Open developer tools and verify that there are no errors in the console.
 
+## Deploy
+commonshost deploy
