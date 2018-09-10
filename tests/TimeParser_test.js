@@ -29,7 +29,8 @@ const tests = [
       {input: 'El Salvador', expected: 'America/El_Salvador'},
       {input: 'PST', expected: 'PST'},
       {input: 'utc', expected: 'Etc/UTC'},
-      {input: 'frankfurt', expected: 'Frankfurt'}
+      {input: 'frankfurt', expected: 'Frankfurt'},
+      {input: 'india', expected: 'India'}
     ]
 
     data.forEach((t) => {
@@ -83,7 +84,7 @@ const tests = [
 
   function parse () {
     const data = [
-      {input: 'now', expectedFormat: null},
+      {input: 'now', expectedFormat: undefined},
       {input: '3pm +3', expectedFormat: 'hA', expectedOffset: 180},
       {input: '10 Jan 2016 5pm', expectedFormat:'D MMM YYYY hA'},
       {input: '12 Feb 2015 6:45am', expectedFormat: 'D MMM YYYY h:mmA'},

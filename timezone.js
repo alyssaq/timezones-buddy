@@ -408,6 +408,7 @@ TimeConvert.timezoneData = {
     "Asia/Tehran|Iran",
     "Asia/Tokyo|Japan",
     "Asia/Tokyo|Osaka",
+    "Europe/Amsterdam|Netherlands",
     "Europe/Berlin|CEST",
     "Europe/Berlin|Frankfurt",
     "Europe/Berlin|Germany",
@@ -429,47 +430,40 @@ TimeConvert.timezoneData = {
   ]
 }
 
-TimeConvert.formats = [
+const baseDateFormats = [
   'D MMM YYYY',
-  'D MMM YYYY hA',
-  'D MMM YYYY h:mmA',
-  'D MMM YYYY HH:mm',
-  'D MMM YYYY h:mm:ssA',
-  'D MMM YYYY HH:mm:ss',
   'D MMM',
-  'D MMM hA',
-  'D MMM h:mmA',
-  'D MMM HH:mm',
-  'D MMM h:mm:ssA',
-  'D MMM HH:mm:ss',
-  'DMMM',
-  'DMMM hA',
-  'DMMM h A',
-  'DMMM h:mmA',
-  'DMMM h:mm A',
-  'DMMM HH:mm',
-  'DMMM h:mm:ssA',
-  'DMMM h:mm:ss A',
-  'DMMM HH:mm:ss',
   'MMM D',
-  'MMM D hA',
-  'MMM D h:mmA',
-  'MMM D HH:mm',
-  'MMM D h:mm:ssA',
-  'MMM D HH:mm:ss',
   'YYYY-MM-DD',
-  'YYYY-MM-DD HH:mm',
-  'YYYY-MM-DD h:mmA',
-  'YYYY-MM-DD HH:mm:ss',
-  'YYYY-MM-DD h:mm:ssA',
-  'HH:mm',
-  'h:mmA',
-  'HH:mm:ss',
-  'h:mm:ssA',
-  'hA',
-  'h:ssA',
-  'X',
-  moment.ISO_8601
 ]
+const baseTimeFormats = [
+  'h A',
+  'h:mm A',
+  'h:mm:ss A',
+  'HH:mm',
+  'HH:mm:ss',
+  'HH:mm:ss A'
+]
+
+const shortYearFormats = baseDateFormats.filter(f => f.includes('YYYY')).map(f => f.replace('YYYY', 'YY'))
+const noSpaceMonthFormats = baseDateFormats.filter(f => f.startsWith('D')).map(f => f.replace('D MMM', 'DMMM'))
+const noSpaceYearFormats = baseDateFormats.filter(f => f.startsWith('D')).map(f => f.replace('D MMM Y', 'DMMMY'))
+const dateFormats = baseDateFormats.concat(shortYearFormats, noSpaceMonthFormats, noSpaceYearFormats)
+
+const noSpaceAMformats = baseTimeFormats.filter(f => f.endsWith(' A')).map(f => f.replace(' A', 'A'))
+const timeFormats = baseTimeFormats.concat(noSpaceAMformats)
+
+const dateTimeFormats = dateFormats.reduce((res, dateFormat) => {
+  timeFormats.map(timeFormat => {
+    res.push(dateFormat + ' ' + timeFormat)
+  })
+  return res
+}, [])
+
+const specialFormats = [
+  'X',
+  'YYYY-MM-DDTHH:mm:ss'
+]
+TimeConvert.formats = specialFormats.concat(dateFormats, timeFormats, dateTimeFormats)
 
 window.moment.tz.load(TimeConvert.timezoneData)

@@ -4,32 +4,47 @@
     const sep = separators.find((sep) => query.includes(sep))
     const [fromTsTzPart, toTzPart] = query.split(sep)
 
-    const parser = new TimeParser(fromTsTzPart)
+    const parser = new TimeParser(fromTsTzPart.trim())
     const fromObj = parser.parse()
-    const tzOffset = parser.parseTimezone(toTzPart)
+    const tzOffset = parser.parseTimezone(toTzPart.trim())
 
     const outFormats = [
       'ddd, D MMM YYYY, h:mm a Z',
       'YYYY-MM-DD HH:mm:ss Z',
       'X'
     ]
-
     const fromHTML = [
       `<span class="datetime">${fromObj.datetime}</span>`,
       fromObj.utcOffset !== null ? `<span class="from-tz">${fromObj.timezone}</span>` : ''
-    ]
-    const inputs = [fromHTML.join(' ')].concat(outFormats.map((f) => fromObj.moment.format(f)))
-    Array.from(document.querySelectorAll('.from > div')).forEach((elem, i) => {
-      if (i === 0) {
-        elem.innerHTML = inputs[i]
-      } else {
-        elem.textContent = inputs[i]
-      }
-    })
+    ].join(' ')
+
+    if (fromObj.moment) {
+      const inputs = [fromHTML].concat(outFormats.map((f) => fromObj.moment.format(f)))
+      Array.from(document.querySelectorAll('.from > div')).forEach((elem, i) => {
+        if (i === 0) {
+          elem.innerHTML = inputs[i]
+        } else {
+          elem.textContent = inputs[i]
+        }
+      })
+    } else {
+      // could not find a matching format to the input string
+      Array.from(document.querySelectorAll('.from > div')).forEach((elem, i) => {
+        if (i === 0) {
+          elem.innerHTML = fromHTML
+        } else if (i === 1) {
+          elem.textContent = 'Could not parse input'
+        } else {
+          elem.textContent = ''
+        }
+      })
+    }
 
     if (tzOffset === null) {
-      document.querySelector('.output-query').textContent = 'Invalid output timezone'
-    } else {
+      Array.from(document.querySelectorAll('.to > div')).forEach((elem, i) => {
+        elem.innerHTML = i === 0 ? 'Invalid output timezone' : ''
+      })
+    } else if (fromObj.moment) {
       document.querySelector('.resultbox > .sep').textContent = sep
       const outputs = [`<span class="to-tz">${toTzPart}</span>`].concat(
         outFormats.map((format) => fromObj.moment.utcOffset(tzOffset).format(format))

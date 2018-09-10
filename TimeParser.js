@@ -12,18 +12,24 @@ class TimeParser {
   }
 
   parse () {
+    if (this.isNow()) {
+      return {
+        moment: moment(),
+        timezone: '',
+        datetime: 'now'
+      }
+    }
+
     const parts = this.timeInput.split(' ')
     const timezone = parts[parts.length - 1]
     const utcOffset = this.parseTimezone(timezone)  // offset can be 0 so check for null
     const timeWithoutTz = utcOffset === null ? this.timeInput : parts.slice(0, parts.length - 1).join(' ')
-    const format = this.isNow() ? null : this.findValidTimeFormat(timeWithoutTz)
+    const format = this.findValidTimeFormat(timeWithoutTz)
 
-    if (!format && utcOffset === null) {
-      this.moment = moment()
+    if (!format) {
+      this.moment = null
     } else if (format && utcOffset === null) {
       this.moment = moment(timeWithoutTz, format, true)
-    } else if (!format) {
-      this.moment = moment().utcOffset(utcOffset, true)
     } else { // format and utcOffset exists
       this.moment = moment(timeWithoutTz, format, true).utcOffset(utcOffset, true)
     }
