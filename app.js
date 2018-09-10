@@ -4,9 +4,9 @@
     const sep = separators.find((sep) => query.includes(sep))
     const [fromTsTzPart, toTzPart] = query.split(sep)
 
-    const parser = new TimeParser(fromTsTzPart.trim())
+    const parser = new TimeParser(fromTsTzPart)
     const fromObj = parser.parse()
-    const tzOffset = parser.parseTimezone(toTzPart.trim())
+    const tzOffset = parser.parseTimezone(toTzPart)
 
     const outFormats = [
       'ddd, D MMM YYYY, h:mm a Z',

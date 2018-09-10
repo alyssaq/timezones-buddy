@@ -1,6 +1,6 @@
 class TimeParser {
-  constructor (timeInput) {
-    this.timeInput = timeInput
+  constructor (timeInput = '') {
+    this.timeInput = timeInput.trim()
   }
 
   isNow () {
@@ -43,8 +43,9 @@ class TimeParser {
     }
   }
 
-  parseTimezone (tzPart) {
-    if (!tzPart || tzPart === '') {
+  parseTimezone (tzPart = '') {
+    tzPart = tzPart.trim()
+    if (tzPart === '') {
       return null
     }
 
