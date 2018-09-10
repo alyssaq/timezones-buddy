@@ -60,7 +60,7 @@
   }
 
   function onClickSearch (e) {
-    e.preventDefault() // Prevent sending to sever
+    e.preventDefault() // Prevent sending to server
     parseAndDisplay(document.querySelector('.query').value.trim())
   }
 
