@@ -90,7 +90,8 @@
     document.querySelector('.query').value = query
   }
 
-  function renderWorldClocks (worldPlaces) {
+  function renderWorldClocks () {
+    const worldPlaces = ['San Francisco', 'UTC', 'London', 'India', 'Singapore']
     const elem = document.querySelector('.worldclocks')
     const parser = new TimeParser()
 
@@ -112,8 +113,6 @@
     e.addEventListener('click', onClickExampleRow, false)
   })
 
-  // Places to display in the bottom world clock section
-  const places = ['San Francisco', 'UTC', 'London', 'India', 'Singapore']
-  renderWorldClocks(places)
-
+  renderWorldClocks()
+  window.setInterval(renderWorldClocks, 60000) // Update every minute
 })(window, TimeParser)
