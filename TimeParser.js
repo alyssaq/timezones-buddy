@@ -1,6 +1,8 @@
 class TimeParser {
   constructor (timeInput = '') {
     this.timeInput = timeInput.trim().toLowerCase()
+    this.months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun',
+                  'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
   }
 
   isNow () {
@@ -24,14 +26,15 @@ class TimeParser {
     const timezone = parts[parts.length - 1]
     const utcOffset = this.parseTimezone(timezone)  // offset can be 0 so check for null
     const timeWithoutTz = utcOffset === null ? this.timeInput : parts.slice(0, parts.length - 1).join(' ')
-    const format = this.findValidTimeFormat(timeWithoutTz)
+    const datetime = this.normalizeMonth(timeWithoutTz)
+    const format = this.findValidTimeFormat(datetime)
 
     if (!format) {
       this.moment = null
     } else if (format && utcOffset === null) {
-      this.moment = moment(timeWithoutTz, format, true)
+      this.moment = moment(datetime, format, true)
     } else { // format and utcOffset exists
-      this.moment = moment(timeWithoutTz, format, true).utcOffset(utcOffset, true)
+      this.moment = moment(datetime, format, true).utcOffset(utcOffset, true)
     }
 
     return {
@@ -39,7 +42,7 @@ class TimeParser {
       format,
       utcOffset,
       timezone,
-      datetime: timeWithoutTz
+      datetime
     }
   }
 
@@ -95,7 +98,16 @@ class TimeParser {
     })
   }
 
-  findValidTimeFormat (time) {
-    return window.TimeConvert.formats.find((mformat) => moment(time, mformat, true).isValid())
+  findValidTimeFormat (datetime) {
+    return window.TimeConvert.formats.find((mformat) => moment(datetime, mformat, true).isValid())
+  }
+
+  normalizeMonth (datetime) {
+    const foundMonth = this.months.find((month) => datetime.includes(month))
+    if (foundMonth) {
+      const re = new RegExp(foundMonth + '[a-z,\.]*')
+      return datetime.replace(re, foundMonth)
+    }
+    return datetime
   }
 }

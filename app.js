@@ -30,23 +30,22 @@
     } else {
       // could not find a matching format to the input string
       Array.from(document.querySelectorAll('.from > div')).forEach((elem, i) => {
-        if (i === 0) {
-          elem.innerHTML = fromHTML
-        } else if (i === 1) {
-          elem.textContent = 'Could not parse input'
-        } else {
-          elem.textContent = ''
-        }
+        elem.textContent = i === 0 ? 'Could not parse input' : ''
       })
     }
 
+    const toHTML = `<span class="to-tz">${toTzPart}</span>`
     if (tzOffset === null) {
       Array.from(document.querySelectorAll('.to > div')).forEach((elem, i) => {
-        elem.innerHTML = i === 0 ? 'Invalid output timezone' : ''
+        elem.textContent = i === 0 ? 'Invalid output timezone' : ''
       })
-    } else if (fromObj.moment) {
+    } else if (!fromObj.moment) {
+      Array.from(document.querySelectorAll('.to > div')).forEach((elem, i) => {
+        elem.innerHTML = i === 0 ? toHTML : ''
+      })
+    } else {
       document.querySelector('.resultbox > .sep').textContent = sep
-      const outputs = [`<span class="to-tz">${toTzPart}</span>`].concat(
+      const outputs = [toHTML].concat(
         outFormats.map((format) => fromObj.moment.utcOffset(tzOffset).format(format))
       )
       Array.from(document.querySelectorAll('.to > div')).forEach((elem, i) => {

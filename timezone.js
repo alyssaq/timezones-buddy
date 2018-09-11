@@ -448,9 +448,10 @@ const baseTimeFormats = [
 ]
 
 const shortYearFormats = baseDateFormats.filter(f => f.includes('YYYY')).map(f => f.replace('YYYY', 'YY'))
+const noSpaceDayFormats = baseDateFormats.filter(f => f.startsWith('MMM')).map(f => f.replace('MMM ', 'MMM'))
 const noSpaceMonthFormats = baseDateFormats.filter(f => f.startsWith('D')).map(f => f.replace('D MMM', 'DMMM'))
 const noSpaceYearFormats = baseDateFormats.filter(f => f.startsWith('D')).map(f => f.replace('D MMM Y', 'DMMMY'))
-const dateFormats = baseDateFormats.concat(shortYearFormats, noSpaceMonthFormats, noSpaceYearFormats)
+const dateFormats = baseDateFormats.concat(shortYearFormats, noSpaceDayFormats, noSpaceMonthFormats, noSpaceYearFormats)
 
 const noSpaceAMformats = baseTimeFormats.filter(f => f.endsWith(' A')).map(f => f.replace(' A', 'A'))
 const timeFormats = baseTimeFormats.concat(noSpaceAMformats)
